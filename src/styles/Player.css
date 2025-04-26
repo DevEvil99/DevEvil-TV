@@ -1,0 +1,94 @@
+:root {
+  --bg: #080808;
+  --bg2: #19161f;
+  --main: #5f22d9;
+  --sec: #ac73ff;
+  --text: #e7e7e7;
+  --ff-inter: "Montserrat", sans-serif;
+  --section-heading: 40px;
+  --fs-lg: 22px;
+  --fs-md: 17px;
+  --fs-sm: 14px;
+  --fs-x-sm: 12px;
+  --fw-7: 700;
+  --fw-6: 600;
+  --fw-5: 500;
+  --px: 120px;
+}
+
+.player iframe{
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+
+  z-index: 11;
+}
+
+.player .overlay{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--main);
+  position: absolute;
+  
+  top: 15px;
+  right: 15px;
+  
+  z-index: 12;
+
+  cursor: pointer;
+}
+
+.player .overlay i{
+  margin: 0 10px;
+  font-weight: bold;
+  font-size: 20px;
+  color: var(--main);
+}
+
+.fa-xmark{
+  font-size: 26px !important;
+}
+
+.ad {
+  text-align: center;
+  color: var(--text);
+  background: var(--main);
+  padding: 10px;
+  margin: 0 50px 10px 50px;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 12;
+}
+
+.ad i {
+  cursor: pointer;
+}
+
+.ad img {
+  border-radius: 15px;
+  width: 100%;
+}
+
+@media screen and (max-width: 600px){
+  .player .overlay i{
+    font-size: 16px;
+
+    margin: 0 5px;
+
+    vertical-align: middle;
+    
+    &.fa-xmark{
+      font-size: 18px;
+    }
+  }
+}

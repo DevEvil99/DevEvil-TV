@@ -1,0 +1,135 @@
+:root {
+  --bg: #080808;
+  --bg2: #19161f;
+  --main: #5f22d9;
+  --sec: #ac73ff;
+  --text: #e7e7e7;
+  --ff-inter: "Montserrat", sans-serif;
+  --section-heading: 40px;
+  --fs-lg: 22px;
+  --fs-md: 17px;
+  --fs-sm: 14px;
+  --fs-x-sm: 12px;
+  --fw-7: 700;
+  --fw-6: 600;
+  --fw-5: 500;
+  --px: 120px;
+}
+
+.banner {
+  margin-bottom: 60px;
+  position: relative;
+  padding: 0px 0px !important;
+  box-shadow: inset 5px -100px 50px rgb(18, 18, 18),
+  inset -5px 20px 50px rgb(18, 18, 18);
+  aspect-ratio: 1920/1080;
+  border: 0;
+}
+
+.banner-card {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 0 !important;
+  overflow: hidden;
+  z-index: -100;
+  aspect-ratio: 1920/1080;
+  border: 0;
+}
+
+.banner-card .banner-img-wrapper {
+  overflow: hidden;
+}
+
+.banner-card .banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+.banner-card .card-content {
+  position: absolute;
+  right:  80px;
+  bottom: 120px;
+  left:   80px;
+}
+
+.banner-card .card-info {
+  display:     flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.banner-card .card-info div {
+  display:     flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.banner-card .card-info i {
+  font-size: 20px;
+  color: var(--text);
+  margin-right: 5px;
+}
+
+.banner-card .card-info span { font-weight: var(--fw-6); font-size: 19px;}
+
+.banner-card .card-info .quality {
+  background: var(--text);
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-weight: var(--fw-7);
+}
+
+.banner-card .card-title {
+  font-size: 30px;
+  color: var(--text);
+  text-shadow: 2px 0 2px rgba(95, 34, 217, 0.501);
+}
+
+.banner-nav {
+  position: absolute;
+  bottom: -35px;
+  padding: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  border-radius: 55px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px  rgba(95, 34, 217, 0.501);
+}
+
+.banner-nav::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: fit-content;
+  height: 100%;
+  z-index: -1;
+}
+
+.banner-nav .center-text {
+  display: flex;
+  margin: 0 -20px 0 0;
+}
+
+.banner-nav .center-text p {
+  font-size: 13px;
+}
+
+.banner-nav .center-text a {
+  margin: 0 20px 0 0;
+}
+
+.line {
+  border: 2px solid #5b5b5b;
+  margin: 0 20px 0 10px;
+  border-radius: 25px;
+}

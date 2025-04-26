@@ -1,0 +1,17 @@
+:root {
+	--bg: #080808;
+	--bg2: #19161f;
+	--main: #5f22d9;
+	--sec: #ac73ff;
+	--text: #e7e7e7;
+	--ff-inter: "Montserrat", sans-serif;
+	--section-heading: 40px;
+	--fs-lg: 22px;
+	--fs-md: 17px;
+	--fs-sm: 14px;
+	--fs-x-sm: 12px;
+	--fw-7: 700;
+	--fw-6: 600;
+	--fw-5: 500;
+	--px: 120px;
+  }

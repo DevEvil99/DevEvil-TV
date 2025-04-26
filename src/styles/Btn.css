@@ -1,0 +1,78 @@
+:root {
+  --bg: #080808;
+  --bg2: #19161f;
+  --main: #5f22d9;
+  --sec: #ac73ff;
+  --text: #e7e7e7;
+  --ff-inter: "Montserrat", sans-serif;
+  --section-heading: 40px;
+  --fs-lg: 22px;
+  --fs-md: 17px;
+  --fs-sm: 14px;
+  --fs-x-sm: 12px;
+  --fw-7: 700;
+  --fw-6: 600;
+  --fw-5: 500;
+  --px: 120px;
+}
+
+.sidebtn ul {
+	display: block;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+	margin: 0 10px 10px 0;
+}
+
+.sidebtn li {
+	margin-top: 15px;
+    font-size: var(--fs-lg);
+	background-color: var(--bg);
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 0 0 10px rgba(95, 34, 217, 0.501);
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+	color: var(--main);
+	cursor: pointer;
+	text-align: center;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--text);
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+	background-color: var(--bg);
+	box-shadow: 0 0 10px rgba(95, 34, 217, 0.501);
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: 50%;
+  display: grid;
+}
+
+.close {
+  color: var(--main);
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--main);
+  text-decoration: none;
+  cursor: pointer;
+}

@@ -1,0 +1,323 @@
+@import url('./Banner.css');
+@import url('./main.css');
+@import url('./MovieDetails.css');
+@import url('./NavBar.css');
+@import url('Player.css');
+@import url('./Search.css');
+@import url('./SideBar.css');
+@import url('./Text.css');
+@import url('./TvShowDetails.css');
+@import url('./Upcoming.css');
+@import url('./Footer.css');
+
+
+:root {
+  --bg: #080808;
+  --bg2: #19161f;
+  --main: #5f22d9;
+  --sec: #ac73ff;
+  --text: #e7e7e7;
+  --ff-inter: "Montserrat", sans-serif;
+  --section-heading: 40px;
+  --fs-lg: 22px;
+  --fs-md: 17px;
+  --fs-sm: 14px;
+  --fs-x-sm: 12px;
+  --fw-7: 700;
+  --fw-6: 600;
+  --fw-5: 500;
+  --px: 120px;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: all 0.2s linear;
+  line-height: 1.5;
+}
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg) !important;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.movies,
+.category,
+.live {
+  padding: 0px 50px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text);
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  object-fit: cover;
+}
+
+input,
+button,
+select {
+  font: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  color: var(--text);
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+  color: var(--text);
+}
+
+.section-heading {
+  font-size: var(--section-heading);
+  font-weight: var(--fw-5);
+  margin-bottom: 60px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px var(--bg2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--main);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main);
+}
+
+::selection {
+  background-color: var(--main);
+  color: var(--bg);
+}
+
+
+@media screen and (max-width: 1200px) {
+  :root {
+    --px: 80px;
+  }
+
+  .sidebar,
+  .sidebar-trending {
+    display: none;
+  }
+
+  body {
+    margin-right: 0 !important;
+    padding: 0;
+  }
+
+  .banner,
+  .movies,
+  .category,
+  .live {
+    padding: 0 0;
+  }
+
+
+  .category-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .footer-brand {
+    margin-right: 0;
+    margin-bottom: 60px;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  :root {
+    --px: 60px;
+  }
+
+  .banner-card .card-content {
+    bottom: 60px;
+    left: 60px;
+    right: 60px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --px: 40px;
+  }
+
+  .navbar {
+    padding: 10px;
+    position: relative;
+  }
+
+  .left-side a, button{
+    display: none;
+    align-items: center;
+  }
+
+  .right-side {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon,
+  .menu-icon {
+    font-size: 20px;
+    cursor: pointer;
+    display: block;
+    margin-left: 10px;
+  }
+
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    left: 0;
+    background-color: var(--bg);
+    padding: 10px;
+    z-index: 1000;
+  }
+
+  .mobile-menu-open .mobile-menu {
+    display: flex;
+  }
+
+  .banner {
+    display: block;
+  }
+
+  .banner-nav {
+    padding: 10px;
+    border-radius: 10px;
+    font-size: var(--fs-sm);
+  }
+
+  .movies {
+    margin-top: 120px;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-bar select {
+    margin-bottom: 20px;
+  }
+
+  .filter-radios {
+    width: 100%;
+  }
+
+  
+#trending:checked ~ .checked-radio-bg {
+  background: var(--main);
+  width: 23%;
+  left: 2%;
+}
+#popular:checked ~ .checked-radio-bg {
+  background: var(--main);
+  width: 23%;
+  left: 25%;
+}
+#upcoming:checked ~ .checked-radio-bg {
+  background: var(--main);
+  width: 25%;
+  left: 48%;
+}
+
+#trending2:checked ~ .checked-radio-bg {
+  background: var(--main);
+  width: 26%;
+  left: 2%;
+}
+#popular2:checked ~ .checked-radio-bg {
+  background: var(--main);
+  width: 25%;
+  left: 29%;
+}
+#upcoming2:checked ~ .checked-radio-bg {
+  background: var(--main);
+  width: 28%;
+  left: 55%;
+}
+}
+
+@media screen and (max-width: 575px) {
+  :root {
+    --px: 20px;
+
+    --section-heading: 32px;
+    --fs-lg: 20px;
+  }
+
+  .banner {
+    display: block;
+  }
+
+  .banner-nav {
+    padding: 10px;
+    border-radius: 10px;
+    font-size: var(--fs-sm);
+  }
+
+  .footer-copyright {
+    flex-direction: column-reverse;
+  }
+
+  .wrapper {
+    margin-bottom: 20px;
+  }
+}

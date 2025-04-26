@@ -1,0 +1,173 @@
+:root {
+  --bg: #080808;
+  --bg2: #19161f;
+  --main: #5f22d9;
+  --sec: #ac73ff;
+  --text: #e7e7e7;
+  --ff-inter: "Montserrat", sans-serif;
+  --section-heading: 40px;
+  --fs-lg: 22px;
+  --fs-md: 17px;
+  --fs-sm: 14px;
+  --fs-x-sm: 12px;
+  --fw-7: 700;
+  --fw-6: 600;
+  --fw-5: 500;
+  --px: 120px;
+}
+
+.sidebar {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  width: 230px;
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.sidebar img {
+  width: 100%;
+  height: 100%;
+}
+
+.menu-list {
+  display: grid;
+  list-style: none;
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.menu-list h1 {
+  font-size: 25px;
+  margin-top: 20px;
+}
+
+.menu-list a {
+  text-decoration: none;
+  color: var(--text);
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.menu-list .menui {
+  margin-right: 10px;
+}
+
+.menu-list .active {
+  color: var(--main);
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.menu-list a:hover {
+  color: var(--sec);
+}
+
+.infocard {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+
+  margin: 0 15px 5px 0;
+  padding: 12px 5px;
+}
+
+.infocard p {
+  text-align: center;
+  font-size: 13px;
+}
+
+.sidebar-trending {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  width: 300px;
+  position: fixed;
+  height: 100%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: scroll !important;
+  z-index: 999;
+}
+
+.sidebar-trending .poster {
+  width: 170px;
+  height: 220px;
+}
+
+.sidebar-trending  h1 {
+  font-size: 25px;
+}
+
+.chat-details {
+  display: flex;
+}
+
+.chat-details img {
+  width: 50px;
+  border-radius: 5px;
+}
+
+.chat-details p {
+  margin-left: 10px;
+}
+
+.chat-content {
+  margin-top: 25px;
+}
+
+.input {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.input p {
+  text-align: center;
+}
+
+#chat-input::placeholder, #chat-input {
+  color: var(--main) !important;
+  padding-left: 5px;
+}
+
+#chat-input {
+  background: red;
+    padding: 15px 0;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.buttonschat {
+  display: flex;
+  position: absolute;
+  bottom: 110px;
+
+}
+
+#send-btn {
+  margin-right: 10px;
+  background: red;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#delete-btn {
+  background: red;
+  padding: 10px;
+  border-radius: 10px;
+}
