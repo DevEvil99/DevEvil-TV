@@ -152,7 +152,7 @@ That's it — your site is live!
 
 ## 🌟 Contributing Your Website
 
-Built something cool with DevEvil-TV? Share it!
+Built something cool with DevEvil TV? Share it!
 
 1. Go to the [Issues](https://github.com/DevEvil99/DevEvil-TV/issues) tab.
 2. Click **"New Issue"**.
