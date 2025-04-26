@@ -2,7 +2,7 @@
 name: Submit Site
 about: Submit your website
 title: ''
-labels: ''
+labels: Submit Site
 assignees: ''
 
 ---
