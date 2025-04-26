@@ -10,18 +10,18 @@
 
 ## 📖 Table of Contents
 
-1. [Features](#features)  
-2. [Prerequisites](#prerequisites)  
-3. [Getting a TMDB API Key](#getting-a-tmdb-api-key)  
-4. [Installation](#installation)  
-5. [Configuration](#configuration)  
-6. [Customizing Styles and Pages](#customizing-styles-and-pages)  
-7. [Enabling Adult & NSFW Content](#enabling-adult--nsfw-content)
-8. [Run & Build](#run--build)  
-9. [Publishing](#publishing)  
-10. [Contributing Your Website](#contributing-your-website)  
-11. [Support & Donations](#support--donations)  
-12. [License](#license)
+1. [Features](#-features)  
+2. [Prerequisites](#-prerequisites)  
+3. [Getting a TMDB API Key](#-getting-a-tmdb-api-key)  
+4. [Installation](#-installation)  
+5. [Configuration](#-configuration)  
+6. [Customizing Styles and Pages](#-customizing-styles-and-pages)  
+7. [Enabling Adult & NSFW Content](#-enabling-adult--nsfw-content)
+8. [Run & Build](#-run--build)  
+9. [Publishing](#-publishing)  
+10. [Contributing Your Website](#-contributing-your-website)  
+11. [Support & Donations](#-support--donations)  
+12. [License](#-license)
 
 ---
 
