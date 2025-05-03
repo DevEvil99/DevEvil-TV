@@ -11,26 +11,26 @@ const Footer = () => {
                         movies and series completely free of charge, without any annoying ads or the
                         need to create an account.</p>
                     <div className="social-link">
-                        <a href="https://devevil.com" target='_blank' rel='noreferrer noopener'>
+                        <a href="https://example.com" target='_blank' rel='noreferrer noopener'>
                             <i className="fas fa-globe logo-facebook"></i>
                         </a>
-                        <a href="https://dsc.gg/devevil" target='_blank' rel='noreferrer noopener'>
+                        <a href="https://dsc.gg/" target='_blank' rel='noreferrer noopener'>
                             <i className="fab fa-discord logo-facebook"></i>
                         </a>
                         <a
-                            href="https://github.com/DevEvil99/DevEvil-TV"
+                            href="https://github.com/"
                             target='_blank'
                             rel='noreferrer noopener'>
                             <i className="fab fa-github logo-facebook"></i>
                         </a>
                         <a
-                            href="https://www.instagram.com/devevil.universe"
+                            href="https://www.instagram.com/"
                             target='_blank'
                             rel='noreferrer noopener'>
                             <i className="fab fa-instagram logo-facebook"></i>
                         </a>
                         <a
-                            href="https://x.com/deveviluniverse"
+                            href="https://x.com/"
                             target='_blank'
                             rel='noreferrer noopener'>
                             <i className="fab fa-x-twitter logo-facebook"></i>
@@ -65,7 +65,7 @@ const Footer = () => {
             </div>
             <div className="footer-copyright">
                 <div className="copyright">
-                    <p>Copyright © {new Date().getFullYear()} DevEvil Universe, All rights reserved</p>
+                    <p>Copyright © {new Date().getFullYear()}, All rights reserved</p>
                     <p>Made with 💜 by DevEvil, Created with ReactJS ⚛, TMDB API 📚, Coffee ☕ &
                         Brain 🧠</p>
                 </div>

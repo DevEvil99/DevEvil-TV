@@ -38,7 +38,7 @@ If you believe that your copyrighted work has been copied in a manner that const
 All claims of copyright infringement related to this website should be addressed to DevEvil TV&rsquo;s designated copyright agent at the following address:
 <br /><br />
 Copyright Contact Information:
-Please contact us at devevilcontact@gmail.com. Kindly include &rsquo;DMCA&rsquo; in the subject line of your email.
+Please contact us. Kindly include &rsquo;DMCA&rsquo; in the subject line of your email.
 <br /><br />
 We sincerely apologize for any misuse of our service and assure you that we are committed to promptly identifying and terminating any abusive files.
 <br /><br />

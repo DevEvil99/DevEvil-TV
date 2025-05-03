@@ -61,11 +61,6 @@ const Privacy = () => {
 						<p>We may change this privacy policy from time to time. If we make significant changes to this
 							privacy policy, we will notify you by posting a notice on our website.
 						</p>
-						<br />
-						<h1>Contact Us
-						</h1>
-						<p>If you have any questions about this privacy policy or our privacy practices, please contact
-							us at tv@devevil.com.</p>
 					</div>
 </div>
 	);
