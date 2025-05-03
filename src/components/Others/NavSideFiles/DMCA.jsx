@@ -46,7 +46,7 @@ We sincerely apologize for any misuse of our service and assure you that we are 
 		</p>
 	</div>
 </div>
-	);
+	); 
   };
 
 export default DMCA;

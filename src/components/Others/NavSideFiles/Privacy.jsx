@@ -61,6 +61,7 @@ const Privacy = () => {
 						<p>We may change this privacy policy from time to time. If we make significant changes to this
 							privacy policy, we will notify you by posting a notice on our website.
 						</p>
+
 					</div>
 </div>
 	);
