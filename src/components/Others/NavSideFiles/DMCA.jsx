@@ -1,4 +1,6 @@
+// src/components/Others/NavBar.js
 import NavBar from '../NavBar';
+import Footer from '../Footer';
 import React from 'react';
 
 const DMCA = () => {
@@ -7,17 +9,10 @@ const DMCA = () => {
 
 <NavBar />
 		
-<div style={{
-	marginTop: '80px',
-	marginLeft:'10px',
-  color: 'var(--text)',
-  fontWeight: '600',
-  textAlign: 'center'
-
-}} className="privacy">
+<div className="privacy">
 		<h1>DMCA Notice</h1>
 		<p>
-		<b>NOTE: DevEvil TV DOES NOT HOST ANY VIDEOS, ONLY PROVIDES EMBEDDED LINKS TO OTHER HOSTED CONTENT</b>
+		<b>NOTE: We do not host, store, or transmit any movies, TV shows, or other media files on our own infrastructure. The service helps you discover and access content through third‑party sources. We do not control those sources or their content.</b>
 		<br /><br />
 		In compliance with the Digital Millennium Copyright Act of 1998 (DMCA) (accessible on the U.S. Copyright Office website at http://lcweb.loc.gov/copyright/), DevEvil TV will promptly address claims of copyright infringement that are reported to DevEvil TV&rsquo;s designated copyright agent specified below. It is important to note that Section 512(f) of the DMCA holds individuals accountable for knowingly misrepresenting that material or activity is infringing, potentially resulting in legal liability. DevEvil TV reserves the right, at its sole discretion, to remove content and terminate the accounts of users who engage in, or appear to engage in, the unauthorized use of intellectual property or other rights belonging to third parties.
 <br /><br />
@@ -38,15 +33,18 @@ If you believe that your copyrighted work has been copied in a manner that const
 All claims of copyright infringement related to this website should be addressed to DevEvil TV&rsquo;s designated copyright agent at the following address:
 <br /><br />
 Copyright Contact Information:
-Please contact us. Kindly include &rsquo;DMCA&rsquo; in the subject line of your email.
+Please contact us at devevilcontact@gmail.com. Kindly include &rsquo;DMCA&rsquo; in the subject line of your email.
 <br /><br />
 We sincerely apologize for any misuse of our service and assure you that we are committed to promptly identifying and terminating any abusive files.
 <br /><br />
-<b>NOTE: DevEvil TV DOES NOT HOST ANY VIDEOS, ONLY PROVIDES EMBEDDED LINKS TO OTHER HOSTED CONTENT</b>
+<b>NOTE: We do not host, store, or transmit any movies, TV shows, or other media files on our own infrastructure. The service helps you discover and access content through third‑party sources. We do not control those sources or their content.</b>
 		</p>
 	</div>
+
+	<Footer />
 </div>
-	); 
+
+	);
   };
 
 export default DMCA;

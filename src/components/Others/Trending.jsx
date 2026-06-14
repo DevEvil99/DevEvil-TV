@@ -12,7 +12,6 @@ const Trending = () => {
         const movies = await getNowPlayingMovies();
         setTrendingMovies(movies.slice(0, 3)); 
       } catch (error) {
-        // Handle error
         console.error('Error fetching trending movies:', error);
       }
     };

@@ -1,3 +1,4 @@
+// src/services/tmdbService.js
 import axios from 'axios';
 
 const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
@@ -81,7 +82,7 @@ export const getPopularTvShows = async (page = 1) => {
 
 export const getMovieDetails = async (movieId) => {
   try {
-    const response = await tmdbService.get(`/movie/${movieId}?include_adult=false&api_key=${TMDB_API_KEY}&append_to_response=credits,videos,images`);
+    const response = await tmdbService.get(`/movie/${movieId}?include_adult=false&api_key=${TMDB_API_KEY}&append_to_response=credits,videos,images&include_image_language=en-US`);
     return response.data;
   } catch (error) {
     console.error('Error fetching movie details:', error);
@@ -91,7 +92,7 @@ export const getMovieDetails = async (movieId) => {
 
 export const getTvShowDetails = async (id) => {
   try {
-    const response = await axios.get(`${BASE_URL}/tv/${id}?include_adult=false&api_key=${TMDB_API_KEY}&append_to_response=credits,seasons,videos,images`);
+    const response = await axios.get(`${BASE_URL}/tv/${id}?include_adult=false&api_key=${TMDB_API_KEY}&append_to_response=credits,seasons,videos,images&include_image_language=en-US`);
 
     if (!response.data || !response.data.seasons) {
       throw new Error('Failed to fetch TV show details');
@@ -113,6 +114,7 @@ export const getTvShowDetails = async (id) => {
 
     const tvShowDetails = {
       name: data.name,
+      poster_path: data.poster_path,
       first_air_date: data.first_air_date,
       episode_run_time: data.episode_run_time,
       genres: data.genres,
@@ -151,7 +153,7 @@ export const getSeasonEpisodes = async (tvShowId, seasonNumber) => {
       id: episode.id,
       name: episode.name,
       still_path: episode.still_path,
-      image: `https://image.tmdb.org/t/p/original/${episode.still_path}`,
+      image: `https://image.tmdb.org/t/p/original/${episode.still_path}`, 
     }));
 
     return episodes;
@@ -179,7 +181,7 @@ export const searchMedia = async (query) => {
       id: result.id,
       title: result.title || result.name,
       poster_path: result.poster_path ? `${result.poster_path}` : null,
-      media_type: result.media_type,
+      media_type: result.media_type, 
     }));
 
     return results;
@@ -188,7 +190,6 @@ export const searchMedia = async (query) => {
     throw error;
   }
 };
-
 
 export const getUpcomingMovies = async (page = 1) => {
   try {
@@ -201,7 +202,6 @@ export const getUpcomingMovies = async (page = 1) => {
     throw error;
   }
 };
-
 
 export const getUpcomingTvShows = async (page = 1) => {
   try {
@@ -408,6 +408,93 @@ export const getAnimeTv = async (page = 1) => {
   }
 }
 
+export const getTurkishMovies = async (page = 1) => {
+  try {
+    const response = await tmdbService.get(
+      `/discover/movie?include_adult=false&api_key=${TMDB_API_KEY}&with_original_language=tr&page=${page}`
+    );
+
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching turkish movies:', error);
+    throw error;
+  }
+}
+
+export const getTurkishTv = async (page = 1) => {
+  try {
+    const response = await tmdbService.get(
+      `/discover/tv?include_adult=false&api_key=${TMDB_API_KEY}&with_original_language=tr&page=${page}`
+    );
+
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching turkish tv:', error);
+    throw error;
+  }
+}
+
+export const getIranianMovies = async (page = 1) => {
+  try {
+    const response = await tmdbService.get(
+      `/discover/movie?include_adult=false&api_key=${TMDB_API_KEY}&with_original_language=fa&page=${page}`
+    );
+
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching iranian movies:', error);
+    throw error;
+  }
+}
+
+export const getIranianTv = async (page = 1) => {
+  try {
+    const response = await tmdbService.get(
+      `/discover/tv?include_adult=false&api_key=${TMDB_API_KEY}&with_original_language=fa&page=${page}`
+    );
+
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching iranian tv:', error);
+    throw error;
+  }
+}
+
+export const getBannerMovies = async () => {
+  try {
+    const response = await tmdbService.get(
+      `/movie/now_playing?include_adult=false&api_key=${TMDB_API_KEY}&page=1`
+    );
+    return response.data.results.slice(0, 6);
+  } catch (error) {
+    console.error('Error fetching banner movies:', error);
+    throw error;
+  }
+};
+
+export const getMovieQuickInfo = async (id) => {
+  const response = await tmdbService.get(
+    `/movie/${id}?include_adult=false&api_key=${TMDB_API_KEY}`
+  );
+  return {
+    id: response.data.id,
+    title: response.data.title,
+    poster_path: response.data.poster_path,
+    media_type: 'movie',
+  };
+};
+
+export const getTvQuickInfo = async (id) => {
+  const response = await tmdbService.get(
+    `/tv/${id}?include_adult=false&api_key=${TMDB_API_KEY}`
+  );
+  return {
+    id: response.data.id,
+    name: response.data.name,
+    poster_path: response.data.poster_path,
+    media_type: 'tv',
+  };
+};
 
 export const getTrendingMovieTrailers = async () => {
   try {
@@ -427,6 +514,90 @@ export const getTrendingMovieTrailers = async () => {
     return movieTrailers;
   } catch (error) {
     console.error('Error fetching trending movie trailers:', error);
+    throw error;
+  }
+};
+
+
+export const getRecentlyReleasedMovies = async (page = 1) => {
+  try {
+    const response = await tmdbService.get(
+      `/discover/movie?include_adult=false&api_key=${TMDB_API_KEY}&sort_by=release_date.desc&page=${page}`
+    );
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching recently released movies:', error);
+    throw error;
+  }
+};
+
+
+export const getMovieVideos = async (movieId) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/movie/${movieId}/videos?api_key=${TMDB_API_KEY}`
+    );
+    const data = await response.json();
+    
+    if (data.results && data.results.length > 0) {
+      const youtubeVideos = data.results.filter((video) => video.site === 'YouTube');
+      
+      if (youtubeVideos.length === 0) {
+        return [];
+      }
+      
+      const officialTrailers = youtubeVideos.filter(
+        (v) => v.official && v.type === 'Trailer'
+      );
+      if (officialTrailers.length > 0) return officialTrailers;
+      
+      const trailers = youtubeVideos.filter((v) => v.type === 'Trailer');
+      if (trailers.length > 0) return trailers;
+      
+      const clips = youtubeVideos.filter((v) => v.type === 'Clip');
+      if (clips.length > 0) return clips;
+      
+      return youtubeVideos;
+    }
+    return [];
+  } catch (error) {
+    console.error(`Error fetching videos for movie ${movieId}:`, error);
+    return [];
+  }
+};
+
+export const getShortsData = async () => {
+  try {
+    const response = await tmdbService.get(
+      `/movie/popular?include_adult=false&api_key=${TMDB_API_KEY}&page=1`
+    );
+    const popularMovies = response.data.results;
+    
+    const shortsWithVideos = await Promise.all(
+      popularMovies.map(async (movie) => {
+        try {
+          const videos = await getMovieVideos(movie.id);
+          return {
+            ...movie,
+            videos: videos,
+          };
+        } catch (err) {
+          console.error(`Failed to fetch videos for movie ${movie.id}`);
+          return {
+            ...movie,
+            videos: [],
+          };
+        }
+      })
+    );
+
+    const moviesWithVideos = shortsWithVideos.filter(
+      (movie) => movie.videos && movie.videos.length > 0 && movie.backdrop_path && movie.poster_path
+    );
+    
+    return moviesWithVideos.slice(0, 50);
+  } catch (error) {
+    console.error('Error fetching shorts data:', error);
     throw error;
   }
 };

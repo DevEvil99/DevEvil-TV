@@ -1,0 +1,46 @@
+.not-found {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 60px;
+}
+
+.not-found-content {
+  text-align: center;
+}
+
+.not-found-content h1 {
+  font-size: 120px;
+  font-weight: var(--fw-7);
+  background: linear-gradient(135deg, var(--main), var(--sec));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.not-found-content h2 {
+  font-size: var(--fs-lg);
+  margin-bottom: 12px;
+}
+
+.not-found-content p {
+  color: rgba(231, 231, 231, 0.6);
+  margin-bottom: 32px;
+}
+
+.not-found-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--main);
+  border-radius: 10px;
+  font-weight: var(--fw-6);
+}
+
+.not-found-btn:hover {
+  background: var(--sec);
+}

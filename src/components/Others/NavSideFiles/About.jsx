@@ -1,5 +1,7 @@
+// src/components/Others/NavBar.js
 import React from 'react';
 import NavBar from '../NavBar';
+import Footer from '../Footer';
 
 const About = () => {
 	return (
@@ -7,20 +9,10 @@ const About = () => {
 <NavBar />
 
 
-<div style={{
-
-	marginTop: '80px',
-	marginLeft:'10px',
-  color: 'var(--text)',
-  fontWeight: '600',
-  textAlign: 'center'
-
-}} className="privacy">
+<div className="privacy">
 
 <h1>About DevEvil TV</h1>
-<p>DevEvil TV is a free and open-source movie and tv show streaming site. DevEvil TV offers users the chance to watch their favorite
-                        movies and series completely free of charge, without any annoying ads or the
-                        need to create an account.
+<p>DevEvil TV is a free and open-source movie and tv show streaming site. DevEvil TV offers users the chance to watch their favorite movies and series completely free of charge, without any annoying ads or the need to create an account.
 </p>
 <br />
 <p>Whether you&rsquo;re in the mood for a classic film, a popular TV series, or the latest blockbuster hit, DevEvil TV has something for everyone. With a vast selection of movies and TV shows available, users can easily find what they&rsquo;re looking for and start watching instantly.
@@ -31,8 +23,10 @@ const About = () => {
 <br />
 <p>As part of the DevEvil Universe & Services, DevEvil TV is committed to providing users with the highest quality streaming experience possible. It is a safe and reliable platform that is constantly updated with the latest content, ensuring that users never run out of new and exciting things to watch.</p>
 					</div>
+
+						<Footer />
 					</div>
 	);
   };
-
+ 
 export default About;

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getMovieDetails, getMovieTrailer, getMovieRecommendations, getMovieReviews } from "../services/tmdbService";
+import WatchlistButton from "./WatchlistButton";
+import LoadingSpinner from "./LoadingSpinner";
+import MediaGridCard from "./MediaGridCard";
 import "../styles/MovieDetails.css";
 
 const MovieDetails = () => {
@@ -12,20 +14,17 @@ const MovieDetails = () => {
   const [movieReviews, setMovieReviews] = useState([]);
   const [activeTab, setActiveTab] = useState('suggested');
 
-
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
         const details = await getMovieDetails(id);
         setMovieDetails(details);
-
         const trailer = await getMovieTrailer(id);
         setTrailerKey(trailer);
-        
         const reviews = await getMovieReviews(id);
         setMovieReviews(reviews.results);
-      } catch (error) {
-        // Handle error
+      } catch {
+        // silent
       }
     };
 
@@ -33,8 +32,8 @@ const MovieDetails = () => {
       try {
         const recommendations = await getMovieRecommendations(id);
         setSuggestedMovies(recommendations.results);
-      } catch (error) {
-        // Handle error
+      } catch {
+        // silent
       }
     };
 
@@ -45,7 +44,7 @@ const MovieDetails = () => {
   }, [id, activeTab]);
 
   if (!movieDetails) {
-    return <div className="loading">Loading...</div>;
+    return <LoadingSpinner fullScreen label="Loading movie" />;
   }
 
   const {
@@ -53,10 +52,12 @@ const MovieDetails = () => {
     release_date,
     runtime,
     genres,
-    overview,
-    vote_average,
     budget,
     revenue,
+    production_countries,
+    production_companies,
+    overview,
+    vote_average,
     images,
     credits,
     backdrop_path,
@@ -69,56 +70,90 @@ const MovieDetails = () => {
     return `${hours}h ${remainingMinutes}m`;
   };
 
-  const formatCurrency = (amount) => {
-    return amount.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    });
-  };
-
-  const toggleTab = (tab) => {
-    setActiveTab(tab);
+  const watchlistItem = {
+    id: Number(id),
+    media_type: 'movie',
+    title,
+    poster_path: movieDetails.poster_path,
   };
 
   return (
-    <div>
-   
+    <div className="detail-page">
       <div
         className="banner-details"
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdrop_path})`,
         }}
-      ></div>
+      />
 
-<div className="media-content">
-      
-        <p className="tagline">{tagline}</p>
-        <p>
+      <div className="detail-page-content">
+        <Link to="/" className="detail-back">
+          <i className="fa-solid fa-arrow-left"></i> Back to Home
+        </Link>
+
+        <div className="detail-hero">
+          {images?.logos?.length > 0 ? (
+            <div className="detail-logo">
+              <img
+                src={`https://image.tmdb.org/t/p/original/${images.logos[0].file_path}`}
+                alt={`${title} logo`}
+                draggable="false"
+              />
+            </div>
+          ) : (
+            <h1 className="detail-title">{title}</h1>
+          )}
+          {tagline && <p className="tagline">&ldquo;{tagline}&rdquo;</p>}
+        </div>
+
+        <div className="detail-meta">
           {genres.map((genre) => (
-            <span key={genre.id} className="genre">
-              {genre.name}
+            <span key={genre.id} className="genre">{genre.name}</span>
+          ))}
+          <span className="detail-meta-pill detail-meta-pill--score">
+            <i className="fa-solid fa-star"></i> {parseFloat(vote_average).toFixed(1).replace(/\.0$/, '')}/10
+          </span>
+          {release_date && (
+            <span className="detail-meta-pill">
+              <i className="fa-regular fa-calendar"></i> {release_date.substring(0, 4)}
             </span>
-          ))}{" "}
-          <span className="date">{release_date}</span>{" "}
-          <span className="dot">•</span>{" "}
-          <span className="time">{formatTime(runtime)}</span>{" "}
-          <span className="dot">•</span>{" "}
-          <span className="rating">
-            User Score: {Math.round(vote_average * 10)}%
-          </span>{" "}
-          <span className="dot">•</span>{" "}
-          <span className="budget">Budget: {formatCurrency(budget)}</span>{" "}
-          <span className="dot">•</span>{" "}
-          <span className="revenue">Revenue: {formatCurrency(revenue)}</span>
-        </p>
+          )}
+          {runtime > 0 && (
+            <span className="detail-meta-pill">
+              <i className="fa-regular fa-clock"></i> {formatTime(runtime)}
+            </span>
+          )}
+          {budget > 0 && (
+            <span className="detail-meta-pill">
+              <i className="fa-solid fa-money-bill"></i>
+              {" "}
+              ${budget.toLocaleString()}
+            </span>
+          )}
+          {revenue > 0 && (
+            <span className="detail-meta-pill">
+              <i className="fa-solid fa-money-bill-trend-up"></i>
+              {" "}
+              ${revenue.toLocaleString()}
+            </span>
+          )}
+          {production_countries.length > 0 && (
+            <span className="detail-meta-pill">
+              <i className="fas fa-globe"></i> {production_countries.map(c => c.name).join(", ")}
+            </span>
+          )}
+         {production_companies?.length > 0 && (
+            <span className="detail-meta-pill">
+              <i className="fas fa-building"></i>{" "}
+              {production_companies.map(company => company.name).join(", ")}
+            </span>
+          )}
+        </div>
+        
 
-        <div className="media-actions">
-          <Link to={`/player/${id}`}>
-            <button className="primary">
-              <i className="fa-solid fa-play"></i>
-              <p>Play</p>
-            </button>
+        <div className="detail-actions-panel">
+          <Link to={`/player/${id}`} className="detail-action-btn detail-action-btn--primary">
+            <i className="fa-solid fa-play"></i> Watch Now
           </Link>
 
           {trailerKey && (
@@ -126,129 +161,96 @@ const MovieDetails = () => {
               href={`https://www.youtube.com/watch?v=${trailerKey}`}
               target="_blank"
               rel="noopener noreferrer"
+              className="detail-action-btn detail-action-btn--secondary trailer-btn"
             >
-              <button className="secondary">
-                <i className="fa-solid fa-popcorn"></i>
-                <p>Watch Trailer</p>
-              </button>
+              <i className="fab fa-youtube"></i> Trailer
             </a>
           )}
 
-{images && images.logos && images.logos.length > 0 && (
-        <div className="logo-container">
-          <img
-            src={`https://image.tmdb.org/t/p/original/${images.logos[0].file_path}`}
-            alt={`${title} Logo`}
-            draggable={'false'}
-          />
-          
-        </div>
-      )}
-
-<div id="frame" style={{ width: "350px" }}>
-  <iframe
-    data-aa="2336504"
-    src="//acceptable.a-ads.com/2336504"
-    style={{
-      border: "0px",
-      padding: "0",
-      width: "350px",
-      height: "100%",
-      overflow: "hidden",
-      backgroundColor: "transparent"
-    }}
-  ></iframe>
-  <a
-    style={{
-      display: "block",
-      textAlign: "right",
-      fontSize: "12px"
-    }}
-    id="frame-link"
-    href="https://a-ads.com/?partner=2336504"
-  >
-    Advertise here
-  </a>
-</div>
-
-
-          {/* Add your existing Play button logic here */}
+          <WatchlistButton item={watchlistItem} className="detail-action-btn detail-action-btn--secondary" />
         </div>
 
         <p className="overview">{overview}</p>
 
-        <div className="tab-section">
+        <div className="detail-tabs">
           <button
-            className={`tab-button ${activeTab === "suggested" ? "active" : ""}`}
-            onClick={() => toggleTab("suggested")}
+            type="button"
+            className={`tab-button ${activeTab === 'suggested' ? 'active' : ''}`}
+            onClick={() => setActiveTab('suggested')}
           >
             Recommendations
           </button>
           <button
-            className={`tab-button ${activeTab === "cast" ? "active" : ""}`}
-            onClick={() => toggleTab("cast")}
+            type="button"
+            className={`tab-button ${activeTab === 'cast' ? 'active' : ''}`}
+            onClick={() => setActiveTab('cast')}
           >
-            Top Billed Cast
+            Cast
           </button>
           <button
-  className={`tab-button ${activeTab === 'reviews' ? 'active' : ''}`}
-  onClick={() => toggleTab('reviews')}
->
-Users Reviews
-</button>
+            type="button"
+            className={`tab-button ${activeTab === 'reviews' ? 'active' : ''}`}
+            onClick={() => setActiveTab('reviews')}
+          >
+            Reviews
+          </button>
         </div>
 
-        {activeTab === "suggested" && (
-          <div>
-            <div className="castul">
-
+        <div className="detail-tab-content">
+          {activeTab === 'suggested' && (
+            <div className="media-grid">
               {suggestedMovies.slice(0, 8).map((movie) => (
-              <Link to={`/movie/${movie.id}`} key={movie.id}>
-                <div>
-                  <img
-                  className="cast-poster"
-                    src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-                    alt={movie.title}
-                  />
-                </div>
-                </Link>
+                <MediaGridCard
+                  key={movie.id}
+                  item={movie}
+                  linkTo={`/movie/${movie.id}`}
+                />
               ))}
             </div>
-          </div>
-        )}
+          )}
 
-        {activeTab === "cast" && (
-          <div>
+          {activeTab === 'cast' && (
             <ul className="castul">
-              {credits.cast.slice(0, 8).map((cast) => (
+              {credits.cast.slice(0, 12).map((cast) => (
                 <li key={cast.id}>
-                  <img
-                    className="cast-poster"
-                    src={`https://image.tmdb.org/t/p/w1280/${cast.profile_path}`}
-                    alt={cast.title || cast.name}
-                    key={cast.id}
-                    draggable="false"
-                  />
+                  {cast.profile_path ? (
+                    <>
+                      <img
+                        className="cast-poster"
+                        src={`https://image.tmdb.org/t/p/w300/${cast.profile_path}`}
+                        alt={cast.name}
+                        draggable="false"
+                      />
+                      <p>{cast.name}</p>
+                    </>
+                  ) : (
+                    <div className="cast-poster media-grid-card__placeholder" style={{ height: 195 }}>
+                      <i className="fa-solid fa-user"></i>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
-          </div>
-        )}
+          )}
 
-{activeTab === 'reviews' && (
-  <div>
-    <ul className="reviews-list">
-      {movieReviews.map((review) => (
-        <li key={review.id} className="review">
-          <p>
-A review by {review.author}</p>
-          <p>{review.content}</p>
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
-
+          {activeTab === 'reviews' && (
+            <ul className="reviews-list">
+              <div className="section-notice">
+               <i className='fas fa-triangle-exclamation'></i> These reviews are provided by users of TMDB and do not reflect the views or opinions of this website. We do not endorse, verify, or reject any user-submitted reviews. Reviews may contain spoilers, opinions, or information that some viewers may find inaccurate or subjective.
+              </div>
+              {movieReviews.length === 0 ? (
+                <li className="review"><p>No reviews yet.</p></li>
+              ) : (
+                movieReviews.map((review) => (
+                  <li key={review.id} className="review">
+                    <p>Review by {review.author}</p>
+                    <p>{review.content}</p>
+                  </li>
+                ))
+              )}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,22 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/Btn.css';
 
-const NavBar = () => {
-  const defaultThemeColors = {
-    main: '#5f22d9',
-    sec: '#ac73ff',
-    text: '#e7e7e7',
-    bg: '#080808',
-    bg2: '#19161f',
-  };
+const defaultThemeColors = {
+  main: '#5f22d9',
+  sec: '#ac73ff',
+  text: '#e7e7e7',
+  bg: '#080808',
+  bg2: '#19161f',
+};
 
+const colorFields = [
+  { key: 'bg', label: 'Background', icon: 'fa-solid fa-fill-drip' },
+  { key: 'bg2', label: 'Surface', icon: 'fa-solid fa-layer-group' },
+  { key: 'main', label: 'Primary', icon: 'fa-solid fa-palette' },
+  { key: 'sec', label: 'Accent', icon: 'fa-solid fa-wand-magic-sparkles' },
+  { key: 'text', label: 'Text', icon: 'fa-solid fa-font' },
+];
+
+const SideButtons = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [themeColors, setThemeColors] = useState(defaultThemeColors);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    const storedColors = JSON.parse(localStorage.getItem('themeColors'));
-    if (storedColors) {
-      setThemeColors(storedColors);
+    try {
+      const storedColors = JSON.parse(localStorage.getItem('themeColors'));
+      if (storedColors) setThemeColors(storedColors);
+    } catch {
+      // ignore invalid storage
     }
   }, []);
 
@@ -26,98 +37,143 @@ const NavBar = () => {
     }
   }, [themeColors]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  useEffect(() => {
+    const onScroll = () => setShowScrollTop(window.scrollY > 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const handleColorChange = (colorKey, value) => {
-    setThemeColors((prevColors) => ({
-      ...prevColors,
-      [colorKey]: value,
-    }));
+    setThemeColors((prev) => ({ ...prev, [colorKey]: value }));
   };
 
   const applyTheme = () => {
     localStorage.setItem('themeColors', JSON.stringify(themeColors));
-    closeModal();
+    setIsModalOpen(false);
   };
 
   const resetToDefault = () => {
     setThemeColors(defaultThemeColors);
+    localStorage.removeItem('themeColors');
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div>
+    <>
       <div className="sidebtn">
         <ul>
-          <li onClick={openModal}><i className='fas fa-gear'></i></li>
-          <a href="#home"><li><i className='fas fa-location-arrow-up'></i></li></a>
+          <li>
+            <button
+              type="button"
+              className="sidebtn__action"
+              onClick={() => setIsModalOpen(true)}
+              aria-label="Theme settings"
+            >
+              <i className="fas fa-gear"></i>
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className="sidebtn__action"
+              onClick={() => window.open('', '_blank')}
+              aria-label="Open Discord"
+            >
+              <i className="fab fa-discord"></i>
+            </button>
+          </li>
+          {showScrollTop && (
+            <li>
+              <button
+                type="button"
+                className="sidebtn__action sidebtn__action--scroll"
+                onClick={scrollToTop}
+                aria-label="Scroll to top"
+              >
+                <i className="fas fa-chevron-up"></i>
+              </button>
+            </li>
+          )}
         </ul>
       </div>
 
       {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}><i className='fas fa-xmark'></i></span>
-            <h2>Theme Settings</h2>
+        <div className="theme-modal" onClick={() => setIsModalOpen(false)} role="presentation">
+          <div
+            className="theme-modal__panel"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-labelledby="theme-modal-title"
+          >
+            <div className="theme-modal__header">
+              <div>
+                <h2 id="theme-modal-title">Theme Settings</h2>
+                <p>Customize DevEvil TV to match your vibe</p>
+              </div>
+              <button
+                type="button"
+                className="theme-modal__close"
+                onClick={() => setIsModalOpen(false)}
+                aria-label="Close"
+              >
+                <i className="fas fa-xmark"></i>
+              </button>
+            </div>
 
-			<label htmlFor="bgColor">Main Background Color:</label>
-            <input
-              type="color"
-              id="bgColor"
-              name="bgColor"
-              value={themeColors.bg}
-              onChange={(e) => handleColorChange('bg', e.target.value)}
-            />
+            <div
+              className="theme-modal__preview"
+              style={{
+                background: `linear-gradient(135deg, ${themeColors.main}, ${themeColors.sec})`,
+                color: themeColors.text,
+              }}
+            >
+              <span>Live preview</span>
+              <div className="theme-modal__preview-dots">
+                <i className="fa-solid fa-circle" style={{ color: themeColors.bg }}></i>
+                <i className="fa-solid fa-circle" style={{ color: themeColors.bg2 }}></i>
+                <i className="fa-solid fa-circle" style={{ color: themeColors.text }}></i>
+              </div>
+            </div>
 
-<label htmlFor="bg2Color">Secondary Background Color:</label>
-            <input
-              type="color"
-              id="bg2Color"
-              name="bg2Color"
-              value={themeColors.bg2}
-              onChange={(e) => handleColorChange('bg2', e.target.value)}
-            />
+            <div className="theme-modal__grid">
+              {colorFields.map(({ key, label, icon }) => (
+                <label key={key} className="theme-color-field">
+                  <span className="theme-color-field__label">
+                    <i className={icon}></i> {label}
+                  </span>
+                  <span className="theme-color-field__input">
+                    <span
+                      className="theme-color-field__swatch"
+                      style={{ backgroundColor: themeColors[key] }}
+                    />
+                    <input
+                      type="color"
+                      value={themeColors[key]}
+                      onChange={(e) => handleColorChange(key, e.target.value)}
+                    />
+                    <code className="theme-color-field__hex">{themeColors[key]}</code>
+                  </span>
+                </label>
+              ))}
+            </div>
 
-            <label htmlFor="mainColor">Main Color:</label>
-            <input
-              type="color"
-              id="mainColor"
-              name="mainColor"
-              value={themeColors.main}
-              onChange={(e) => handleColorChange('main', e.target.value)}
-            />
-
-            <label htmlFor="secColor">Secondary Color:</label>
-            <input
-              type="color"
-              id="secColor"
-              name="secColor"
-              value={themeColors.sec}
-              onChange={(e) => handleColorChange('sec', e.target.value)}
-            />
-
-            <label htmlFor="textColor">Text Color:</label>
-            <input
-              type="color"
-              id="textColor"
-              name="textColor"
-              value={themeColors.text}
-              onChange={(e) => handleColorChange('text', e.target.value)}
-            />
-
-            
-            <button onClick={applyTheme}>Apply Theme</button>
-            <button onClick={resetToDefault}>Reset to Default</button>
+            <div className="theme-modal__actions">
+              <button type="button" className="theme-modal__btn theme-modal__btn--ghost" onClick={resetToDefault}>
+                <i className="fa-solid fa-rotate-left"></i> Reset
+              </button>
+              <button type="button" className="theme-modal__btn theme-modal__btn--primary" onClick={applyTheme}>
+                <i className="fa-solid fa-check"></i> Apply Theme
+              </button>
+            </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
-export default NavBar;
+export default SideButtons;

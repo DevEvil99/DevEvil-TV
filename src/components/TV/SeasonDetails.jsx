@@ -28,6 +28,7 @@ const SeasonDetails = ({ tvShowId, seasonNumber }) => {
             {episode.image && <img draggable={'false'} src={episode.image} alt={`Episode ${episode.name}`} />}
             </Link>
             
+            
             <div className='episode-details'>
             <Link to={`/player/${tvShowId}?e=${index + 1}&s=${seasonNumber}`}>
             <p>{index + 1}. {episode.name}</p>

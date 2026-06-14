@@ -1,0 +1,101 @@
+.my-list-page {
+  padding-top: 120px;
+  min-height: 70vh;
+}
+
+.my-list-empty {
+  text-align: center;
+  padding: 80px 20px;
+  background: var(--bg2);
+  border-radius: 20px;
+  border: 1px dashed rgba(172, 115, 255, 0.3);
+}
+
+.my-list-empty i {
+  font-size: 64px;
+  color: var(--main);
+  margin-bottom: 20px;
+}
+
+.my-list-empty h2 {
+  margin-bottom: 12px;
+}
+
+.my-list-empty p {
+  color: rgba(231, 231, 231, 0.7);
+  margin-bottom: 24px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.my-list-browse-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: var(--main);
+  border-radius: 10px;
+  font-weight: var(--fw-6);
+}
+
+.my-list-browse-btn:hover {
+  background: var(--sec);
+}
+
+.my-list-card-wrap {
+  position: relative;
+}
+
+.my-list-card-title {
+  font-size: var(--fs-sm);
+  margin-top: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.my-list-type {
+  font-size: var(--fs-x-sm);
+  color: var(--sec);
+}
+
+.my-list-no-poster {
+  width: 100%;
+  height: 250px;
+  background: var(--bg2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: var(--main);
+  border-radius: 15px;
+}
+
+.my-list-remove-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  z-index: 5;
+  font-size: 13px;
+}
+
+.my-list-card-wrap:hover .my-list-remove-btn {
+  opacity: 1;
+}
+
+.my-list-remove-btn:hover {
+  background: #c0392b;
+}
+
+@media screen and (max-width: 768px) {
+  .my-list-page {
+    padding: 100px 20px 40px;
+  }
+}

@@ -7,8 +7,12 @@
 @import url('./SideBar.css');
 @import url('./Text.css');
 @import url('./TvShowDetails.css');
-@import url('./Upcoming.css');
 @import url('./Footer.css');
+@import url('./ContinueWatching.css');
+@import url('./MyList.css');
+@import url('./Toast.css');
+@import url('./NotFound.css');
+@import url('./LoadingSpinner.css');
 
 
 :root {
@@ -27,6 +31,7 @@
   --fw-6: 600;
   --fw-5: 500;
   --px: 120px;
+  --navbar-height: 72px;
 }
 
 * {
@@ -156,25 +161,11 @@ a {
   .movies,
   .category,
   .live {
-    padding: 0 0;
+    padding: 0;
   }
-
 
   .category-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-
-  .footer-content {
-    flex-direction: column;
-  }
-
-  .footer-brand {
-    margin-right: 0;
-    margin-bottom: 60px;
-  }
-
-  .footer-links {
-    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
   }
 }
 
@@ -182,70 +173,12 @@ a {
   :root {
     --px: 60px;
   }
-
-  .banner-card .card-content {
-    bottom: 60px;
-    left: 60px;
-    right: 60px;
-  }
 }
 
 @media screen and (max-width: 768px) {
   :root {
     --px: 40px;
-  }
-
-  .navbar {
-    padding: 10px;
-    position: relative;
-  }
-
-  .left-side a, button{
-    display: none;
-    align-items: center;
-  }
-
-  .right-side {
-    display: flex;
-    align-items: center;
-  }
-
-  .search-icon,
-  .menu-icon {
-    font-size: 20px;
-    cursor: pointer;
-    display: block;
-    margin-left: 10px;
-  }
-
-  .mobile-menu {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 80px;
-    right: 0;
-    left: 0;
-    background-color: var(--bg);
-    padding: 10px;
-    z-index: 1000;
-  }
-
-  .mobile-menu-open .mobile-menu {
-    display: flex;
-  }
-
-  .banner {
-    display: block;
-  }
-
-  .banner-nav {
-    padding: 10px;
-    border-radius: 10px;
-    font-size: var(--fs-sm);
-  }
-
-  .movies {
-    margin-top: 120px;
+    --navbar-height: 64px;
   }
 
   .filter-bar {
@@ -261,63 +194,43 @@ a {
     width: 100%;
   }
 
-  
-#trending:checked ~ .checked-radio-bg {
-  background: var(--main);
-  width: 23%;
-  left: 2%;
-}
-#popular:checked ~ .checked-radio-bg {
-  background: var(--main);
-  width: 23%;
-  left: 25%;
-}
-#upcoming:checked ~ .checked-radio-bg {
-  background: var(--main);
-  width: 25%;
-  left: 48%;
-}
+  #trending:checked ~ .checked-radio-bg {
+    background: var(--main);
+    width: 23%;
+    left: 2%;
+  }
+  #popular:checked ~ .checked-radio-bg {
+    background: var(--main);
+    width: 23%;
+    left: 25%;
+  }
+  #upcoming:checked ~ .checked-radio-bg {
+    background: var(--main);
+    width: 25%;
+    left: 48%;
+  }
 
-#trending2:checked ~ .checked-radio-bg {
-  background: var(--main);
-  width: 26%;
-  left: 2%;
-}
-#popular2:checked ~ .checked-radio-bg {
-  background: var(--main);
-  width: 25%;
-  left: 29%;
-}
-#upcoming2:checked ~ .checked-radio-bg {
-  background: var(--main);
-  width: 28%;
-  left: 55%;
-}
+  #trending2:checked ~ .checked-radio-bg {
+    background: var(--main);
+    width: 26%;
+    left: 2%;
+  }
+  #popular2:checked ~ .checked-radio-bg {
+    background: var(--main);
+    width: 25%;
+    left: 29%;
+  }
+  #upcoming2:checked ~ .checked-radio-bg {
+    background: var(--main);
+    width: 28%;
+    left: 55%;
+  }
 }
 
 @media screen and (max-width: 575px) {
   :root {
     --px: 20px;
-
     --section-heading: 32px;
     --fs-lg: 20px;
-  }
-
-  .banner {
-    display: block;
-  }
-
-  .banner-nav {
-    padding: 10px;
-    border-radius: 10px;
-    font-size: var(--fs-sm);
-  }
-
-  .footer-copyright {
-    flex-direction: column-reverse;
-  }
-
-  .wrapper {
-    margin-bottom: 20px;
   }
 }
