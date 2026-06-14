@@ -5,7 +5,7 @@
 </div>
 <br>
 
-![tv](https://github.com/user-attachments/assets/ba066a76-ad6b-40ba-8657-12ff56a80587)
+![tv](https://i.ibb.co/gL5MnRHx/main.png)
 
 
 ## 📖 Table of Contents
